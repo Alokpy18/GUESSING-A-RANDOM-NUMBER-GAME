@@ -29,6 +29,7 @@ Wrong! Guess Lower
 Guess the number : 62
 Congratulations! Correct Guess 
 Attempts: 3
+'''
 
 ## AUTHOR:
 ALOK KUMAR SINGH
