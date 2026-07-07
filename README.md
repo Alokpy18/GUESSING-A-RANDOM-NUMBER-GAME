@@ -16,12 +16,12 @@ This is a simple pytjhon number guessing game. the program generates a random nu
 1. Clone the repository.
 2. Open the project in VS code.
 3. Run the python file:
-   '''bash
+   ```bash
    python guessing_game.py
-   '''
+   ```
 
 ## EXAMPLE OUTPUT:
-'''
+```
 Guess the number : 45 
 Wrong! Guess Higher
 Guess the number : 70 
@@ -29,7 +29,7 @@ Wrong! Guess Lower
 Guess the number : 62
 Congratulations! Correct Guess 
 Attempts: 3
-'''
+```
 
 ## AUTHOR:
 ALOK KUMAR SINGH
