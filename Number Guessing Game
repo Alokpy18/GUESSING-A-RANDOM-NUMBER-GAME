@@ -1,0 +1,182 @@
+
+
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+root = tk.Tk()
+root.title("number guessing game")
+root.geometry("500x450")
+root.configure(bg="#f5deb3")
+
+number = 0
+attempts = 0
+max_attempts = 7
+best_score = None
+time_left = 30
+
+
+def start_game():
+    global number, attempts, max_attempts, time_left
+
+    level = difficulty.get()
+
+    if level == "easy":
+        number = random.randint(1,50)
+        max_attempts = 10 
+
+    elif level == "medium":
+        number = random.randint(1,100)
+        max_attempts = 7
+
+    else:
+        number = random.randint(1,500)
+        max_attempts = 5
+
+    attempts = 0
+    time_left = 30
+
+    result_label.config(text="")
+    attempts_label.config(text=f"attempt left : {max_attempts}")
+    timer_label.config(text="time left : 30")
+    entry.delete(0, tk.END)
+
+    countdown()
+
+def countdown() :
+    global time_left
+
+    timer_label.config(text=f"time left : {time_left}")
+
+    if time_left > 0:
+        time_left -= 1
+        root.after(1000, countdown)
+    else:
+        messagebox.showinfo(
+            "time over", 
+            f"time up!\nnumber was {number}"
+        )            
+        start_game()
+
+def guess():
+    global attempts, best_score
+
+    try:
+        user = int(entry.get())
+    except:
+        messagebox.showerror(
+            "error",
+            "enter valid number"
+        )
+        return
+    attempts += 1
+    left = max_attempts - attempts 
+
+    if attempts >= max_attempts:
+        messagebox.showinfo(
+            "game over", 
+            f"you lost!\nnumber was {number}"
+        )
+        start_game()
+        return
+
+    if user < number:
+        result_label.config(text="to low!!", fg="red")
+
+    elif user > number:
+        result_label.config(text="to high!!", fg="red")
+
+    else:
+        result_label.config(text="correct!", fg="green")
+
+        if best_score is None or attempts < best_score:
+            best_score = attempts 
+            best_score.config(text=f"best score : {best_score}")
+
+            messagebox.showinfo("winner",f"you guessed in {attempts} attempts")      
+            return
+    attempts_label.config(text=f"attempts left : {left}")
+    if left == 0:
+        messagebox.showinfo("game over", f"you lost!\nnumber was {number}")
+        start_game()
+
+def hint():
+    if number % 2 == 0:
+        messagebox.showinfo("hint", "number is even")
+    else:
+        messagebox.showinfo("hint", "number is odd")
+
+
+title = tk.Label(
+    root, text="number guessing game", 
+    font=("times new roman", 22, "bold"),
+    bg="#f5deb3")
+title.pack(pady=15)
+
+difficulty = tk.StringVar()
+difficulty.set("medium",)
+
+tk.Label(
+    root, 
+    text="select defficulty",
+    font=("arial", 14),
+    bg="#f5deb3").pack()
+
+tk.OptionMenu(
+    root,
+    difficulty,
+    "Easy",
+    "Medium",
+    "Hard").pack(pady=10)
+
+entry = tk.Entry(
+    root,
+    font=("arial", 20),
+    justify="center")
+entry.pack(pady=15)
+
+tk.Button(
+    root,
+    text="guess",
+    font=("arial", 14),
+    bg="lightgreen",
+    command=guess).pack(pady=5)
+
+tk.Button(
+    root,
+    text="hint",
+    font=("arial", 14),
+    bg="lightblue",
+    command=hint).pack(pady=5)
+
+tk.Button(
+    root,
+    text="play again",
+    font=("arial", 14),
+    bg="orange",
+    command=start_game).pack(pady=5)
+
+result_label = tk.Label(
+    root,
+    text="",
+    font=("arial", 18, "bold"),
+    bg="#f5deb3")
+result_label.pack(pady=10)
+
+attempts_label = tk.Label(
+    root,
+    text="attempts left : 7",
+    font=("arial", 14),
+    bg="#f5deb3")
+attempts_label.pack()
+
+timer_label = tk.Label(
+    root,
+    text="time left : 30",
+    font=("arial", 14),
+    bg="#f5deb3")
+timer_label.pack(pady=10)
+
+start_game()
+
+root.mainloop()
