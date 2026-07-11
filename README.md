@@ -241,15 +241,13 @@ Number-Guessing-Game/
 ### Step 1
 Install Python.
 
-Download:
-
-https://www.python.org/downloads/
+Download: https://www.python.org/download/
 
 ### Step 2
 Clone Repository:
 
 ```bash
-Git clone 
+Git clone   
 ```
 
 ### Step 3
@@ -311,6 +309,9 @@ Press **Play Again** to restart.
 Add project screenshots here.
 
 Example:
+
+<img width="1600" height="1200" alt="GUI guessing game png" src="https://github.com/user-attachments/assets/e3173f2d-69cc-478e-a853-e618abc7c557" />
+
 
 ---
 
