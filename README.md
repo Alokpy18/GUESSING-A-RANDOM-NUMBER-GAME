@@ -247,7 +247,7 @@ Download: https://www.python.org/download/
 Clone Repository:
 
 ```bash
-Git clone   
+Git clone https://github.com/Alokpy18/GUESSING-A-RANDOM-NUMBER-GAME.git 
 ```
 
 ### Step 3
